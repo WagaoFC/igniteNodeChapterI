@@ -28,10 +28,14 @@ app.post('/account', (resquest, response) => {
     return response.status(201).send();
 });
 
-app.get('/statement/:cpf', (resquest, response) => {
-    const { cpf } = resquest.params;
+app.get('/statement', (resquest, response) => {
+    const { cpf } = resquest.headers;
 
     const customer = customers.find(customer => customer.cpf === cpf);
+
+    if (!customer) {
+        return response.status(400).json({ error: 'Customer not found' });
+    }
 
     return response.json(customer.statement);
 })
