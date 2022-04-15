@@ -54,8 +54,6 @@ app.post('/account', (request, response) => {
     return response.status(201).send();
 });
 
-// app.use(verifyIfExistsAccountCPF);
-
 app.get('/statement', verifyIfExistsAccountCPF, (request, response) => {
     const { customer } = request;
     
